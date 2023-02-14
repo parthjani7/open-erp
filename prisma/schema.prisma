@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Country {
+  id      Int       @id @default(autoincrement())
+  name    String
+  Company Company[]
+
+  @@map("countries")
+}
+
+model Company {
+  id                 String   @id @default(uuid())
+  name               String   @db.VarChar(150)
+  address            String
+  city               String
+  state              String
+  zipcode            String
+  conutry            Country  @relation(fields: [country_id], references: [id])
+  country_id         Int
+  industry           String?
+  numberOfEmployees  Int?
+  contactPersonName  String?
+  contactPersonEmail String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  User               User[]
+
+  @@map("companies")
+}
+
+model User {
+  id         String   @id @default(uuid())
+  name       String   @db.VarChar(50)
+  email      String   @unique
+  company    Company  @relation(fields: [company_id], references: [id])
+  company_id String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("users")
+}
