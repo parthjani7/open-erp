@@ -4,7 +4,7 @@ export default function login() {
   return (
     <>
       <div className="flex flex-row w-full min-h-screen">
-        <div className="hidden lg:flex flex-col justify-between bg-gradient-to-r from-indigo-500 to-blue-500 lg:p-8 xl:p-12 lg:max-w-sm xl:max-w-lg text-white">
+        <div className="hidden lg:flex flex-col justify-between bg-gradient-to-b from-cyan-500 to-blue-500 lg:p-8 xl:p-12 lg:max-w-sm xl:max-w-lg text-white">
           <div className="flex items-center justify-start space-x-3">
             <h5 className="font-medium text-xl">Timely</h5>
           </div>
@@ -51,6 +51,7 @@ export default function login() {
             <form action="/" method="post">
               <div className="flex flex-col max-w-md space-y-5">
                 <input
+                  name="email"
                   type="email"
                   required
                   placeholder="Email"
