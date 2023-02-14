@@ -1,4 +1,5 @@
 import Google from 'public/google.svg'
+import styles from './page.module.css'
 
 export default function login() {
   return (
@@ -68,9 +69,14 @@ export default function login() {
                   <span className="px-4">Or</span>
                   <span className="w-full border border-black"></span>
                 </div>
-                <button className="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black relative">
-                  <Google className="mr-2" alt="Google"></Google>
-                  <span>Sign in with Google</span>
+                <button
+                  className={` ${styles.group} flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black relative`}
+                >
+                  Sign in with{' '}
+                  <Google
+                    className={` ${styles.animate_wiggle} ml-2`}
+                    alt="Google"
+                  ></Google>
                 </button>
               </div>
             </form>
