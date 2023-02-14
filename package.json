@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.1.6",
+    "@svgr/webpack": "^6.5.1",
     "autoprefixer": "^10.4.13",
     "eslint-config-prettier": "^8.6.0",
     "husky": "^8.0.3",
