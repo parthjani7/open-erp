@@ -6,7 +6,7 @@ export default function login() {
       <div className="flex flex-row w-full min-h-screen">
         <div className="hidden lg:flex flex-col justify-between bg-gradient-to-r from-indigo-500 to-blue-500 lg:p-8 xl:p-12 lg:max-w-sm xl:max-w-lg text-white">
           <div className="flex items-center justify-start space-x-3">
-            <h5 className="font-medium text-xl">OpenERP</h5>
+            <h5 className="font-medium text-xl">Timely</h5>
           </div>
           <div className="space-y-5">
             <h1 className="lg:text-3xl xl:text-5xl xl:leading-snug font-extrabold">
