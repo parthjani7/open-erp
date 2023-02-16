@@ -2,91 +2,91 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+    provider = "mysql"
+    url      = env("DATABASE_URL")
 }
 
 model Account {
-  id                  String  @id @default(cuid())
-  user_id             String
-  type                String
-  provider            String
-  provider_account_id String
-  refresh_token       String? @db.Text
-  access_token        String? @db.Text
-  expires_at          Int?
-  token_type          String?
-  scope               String?
-  id_token            String? @db.Text
-  session_state       String?
+    id                String  @id @default(cuid())
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refreshToken      String? @db.Text
+    access_token      String? @db.Text
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? @db.Text
+    sessionState      String?
 
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, provider_account_id])
-  @@map("accounts")
+    @@unique([provider, providerAccountId])
+    @@map("accounts")
 }
 
 model Session {
-  id      String   @id @default(cuid())
-  token   String   @unique
-  user_id String
-  expires DateTime
-  user    User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    id           String   @id @default(cuid())
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("sessions")
+    @@map("sessions")
 }
 
 model Country {
-  id      Int       @id @default(autoincrement())
-  name    String
-  Company Company[]
+    id      Int       @id @default(autoincrement())
+    name    String
+    Company Company[]
 
-  @@map("countries")
+    @@map("countries")
 }
 
 model Company {
-  id                 String   @id @default(uuid())
-  name               String   @db.VarChar(150)
-  address            String
-  city               String
-  state              String
-  zipcode            String
-  conutry            Country  @relation(fields: [country_id], references: [id])
-  country_id         Int
-  industry           String?
-  numberOfEmployees  Int?
-  contactPersonName  String?
-  contactPersonEmail String?
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-  User               User[]
+    id                 String   @id @default(uuid())
+    name               String   @db.VarChar(150)
+    address            String   @db.Text
+    city               String
+    state              String
+    zipcode            String   @db.VarChar(10)
+    conutry            Country  @relation(fields: [countryId], references: [id])
+    countryId          Int
+    industry           String?
+    numberOfEmployees  Int?
+    contactPersonName  String?
+    contactPersonEmail String?
+    createdAt          DateTime @default(now())
+    updatedAt          DateTime @updatedAt
+    User               User[]
 
-  @@map("companies")
+    @@map("companies")
 }
 
 model User {
-  id         String    @id @default(uuid())
-  name       String    @db.VarChar(50)
-  email      String    @unique
-  company    Company   @relation(fields: [company_id], references: [id])
-  accounts   Account[]
-  sessions   Session[]
-  company_id String
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+    id        String    @id @default(uuid())
+    name      String    @db.VarChar(50)
+    email     String    @unique
+    company   Company?  @relation(fields: [companyId], references: [id])
+    accounts  Account[]
+    sessions  Session[]
+    companyId String?
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
 
-  @@map("users")
+    @@map("users")
 }
 
 model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
+    identifier String
+    token      String   @unique
+    expires    DateTime
 
-  @@unique([identifier, token])
-  @@map("verification_tokens")
+    @@unique([identifier, token])
+    @@map("verification_tokens")
 }
